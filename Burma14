@@ -1,0 +1,40 @@
+import math
+import random
+
+
+# mokhtasat 14 shahr
+Cities = [[20.09, 94.54], [16.47, 94.44], [22.39, 93.37], [25.23, 97.24], [22.00, 96.05], [20.47, 97.02], [19.41, 97.13],
+          [17.20, 96.29], [20.09, 92.52], [16.30, 97.38], [14.05, 98.12], [16.53, 97.38], [21.52, 95.59], [16.47, 96.10]]
+
+
+# mohasebe fasele aghaldisi
+def distancecall(city1, city2):
+    x = (city1[0] + city2[0]) ** 2
+    y = (city1[1] + city2[1]) ** 2
+    return math.sqrt(x + y)
+
+
+# motaghayer baray yaftan behtarin masir
+best_path = []
+best_fitness = float("inf")
+
+for generation in range(10):
+
+    for _ in range(100):
+
+        path = Cities[:]
+        random.shuffle(path)
+
+        # mohasebe masafat cool
+        fitness = 0
+        for i in range(len(path) - 1):
+            fitness += distancecall(path[i], path[i + 1])
+        # update behtarin masir
+        if fitness < best_fitness:
+            best_path = path
+            best_fitness = fitness
+
+print("behtarin masir:")
+print(best_path)
+print("fitness:")
+print(best_fitness)
